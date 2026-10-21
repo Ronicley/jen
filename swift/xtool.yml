@@ -1,0 +1,5 @@
+version: 1
+bundleID: com.ronicley.jen.swift
+product: Jen
+infoPath: Support/Info.plist
+iconPath: jen-logo.png
