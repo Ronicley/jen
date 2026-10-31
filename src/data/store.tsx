@@ -12,11 +12,12 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   const lock = useRef(false);
   const load = useCallback(async () => {
     setError('');
-    try { setData(await snapshot()); } catch { setError('Não foi possível abrir seus dados locais. Tente novamente.'); }
+    try { setData(await snapshot()); } catch (error) { console.error('Falha ao abrir banco local:', error); setError('Não foi possível abrir seus dados locais. Tente novamente.'); }
   }, []);
   useEffect(() => {
     let mounted = true;
-    snapshot().then(value => { if (mounted) setData(value); }).catch(() => {
+    snapshot().then(value => { if (mounted) setData(value); }).catch(error => {
+      console.error('Falha ao abrir banco local:', error);
       if (mounted) setError('Não foi possível abrir seus dados locais. Tente novamente.');
     });
     return () => { mounted = false; };

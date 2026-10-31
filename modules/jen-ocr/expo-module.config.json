@@ -1,0 +1,5 @@
+{
+  "platforms": ["android", "apple"],
+  "android": { "modules": ["com.ronicley.jen.ocr.JenOcrModule"] },
+  "apple": { "modules": ["JenOcrModule"] }
+}

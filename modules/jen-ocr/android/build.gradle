@@ -1,0 +1,15 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'com.ronicley.jen.ocr'
+version = '1.0.0'
+
+android {
+  namespace 'com.ronicley.jen.ocr'
+}
+
+dependencies {
+  implementation 'com.google.mlkit:text-recognition:16.0.1'
+}

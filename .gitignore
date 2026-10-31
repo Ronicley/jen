@@ -57,3 +57,6 @@ example
 # generated native folders
 /ios
 /android
+*.apk
+.credentials/
+credentials.json

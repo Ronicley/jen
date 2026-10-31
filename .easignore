@@ -1,0 +1,11 @@
+.git
+.expo
+node_modules
+swift
+dist
+.claude
+.vscode
+*.ipa
+*.apk
+.credentials
+credentials.json

@@ -2,11 +2,12 @@ import type { ReactNode } from 'react';
 import { ScrollView, View, Text, Pressable, TextInput, StyleSheet, KeyboardAvoidingView, Platform, type TextInputProps } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-export const colors = { blue: '#0077C8', ink: '#152536', muted: '#5D6D7E', background: '#F4F6F8', line: '#E3E9EF', green: '#147D64', red: '#C43737', pale: '#E8F4FC' };
+import { Image } from 'expo-image';
+export const colors = { blue: '#06325A', ink: '#152536', muted: '#5D6D7E', background: '#F2F7F7', line: '#E3E9EF', green: '#147D64', red: '#CC382B', pale: '#E0F5F5' };
 export function Screen({ children }: { children: ReactNode }) {
   return <SafeAreaView style={s.safe} edges={['top', 'left', 'right']}><KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}><ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={s.page}>{children}</ScrollView></KeyboardAvoidingView></SafeAreaView>;
 }
-export function Heading({ title, subtitle }: { title: string; subtitle?: string }) { return <View style={{ gap: 6, marginBottom: 8 }}><Text style={s.title}>{title}</Text>{subtitle ? <Text style={s.muted}>{subtitle}</Text> : null}</View>; }
+export function Heading({ title, subtitle }: { title: string; subtitle?: string }) { return <View style={{ gap: 6, marginBottom: 8 }}><Image source={require('../../assets/images/jen-logo.png')} accessibilityLabel="jen" style={{ width: 80, height: 64 }} contentFit="contain" /><Text style={s.title}>{title}</Text>{subtitle ? <Text style={s.muted}>{subtitle}</Text> : null}</View>; }
 export function Card({ children, blue = false }: { children: ReactNode; blue?: boolean }) { return <View style={[s.card, blue && { backgroundColor: colors.blue }]}>{children}</View>; }
 export function Label({ children }: { children: ReactNode }) { return <Text style={s.label}>{children}</Text>; }
 export function Body({ children }: { children: ReactNode }) { return <Text style={s.body}>{children}</Text>; }

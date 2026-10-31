@@ -43,3 +43,16 @@ test('purchase survives database close and reopen', () => {
     finally { db.close(); }
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });
+test('additive upgrade preserves a version 1 purchase, products and list', () => {
+  const db = new DatabaseSync(':memory:');
+  try {
+    const oldSchema = schema.slice(0, schema.indexOf('CREATE TABLE IF NOT EXISTS trip_receipts')) + 'PRAGMA user_version=1;';
+    db.exec(oldSchema); insertTrip(db);
+    db.exec("INSERT INTO products VALUES (1,'Leite','unit'); INSERT INTO items VALUES (1,1,1,'Leite','unit',549,3); INSERT INTO list_items VALUES (1,'Arroz',1)");
+    db.exec(schema);
+    assert.equal(db.prepare('PRAGMA user_version').get().user_version, 2);
+    assert.equal(db.prepare('SELECT price * amount AS total FROM items').get().total, 1647);
+    assert.equal(db.prepare('SELECT name,checked FROM list_items').get().checked, 1);
+    assert.equal(db.prepare('SELECT COUNT(*) AS n FROM products').get().n, 1);
+  } finally { db.close(); }
+});
